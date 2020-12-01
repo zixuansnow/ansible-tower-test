@@ -7,13 +7,13 @@
         src={{ item.src }}
         dest={{ item.dest }}
       with_items:
-        - src: /usr/local/src/jdk-8u162-linux-x64.rpm
+        - src: /usr/local/src/jdk-8u271-linux-x64.rpm
           dest: /usr/local/
         - src: /usr/local/src/apache-tomcat-8.0.38.tar.gz
           dest: /usr/local/
     - name: "install jdk"
       yum:
-        name: /usr/local/jdk-8u162-linux-x64.rpm
+        name: /usr/local/jdk-8u271-linux-x64.rpm
         state: present
     - name: "install tomcat8"
       shell: cd /usr/local/ && tar xf apache-tomcat-8.0.38.tar.gz
