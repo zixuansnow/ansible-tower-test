@@ -1,0 +1,23 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+    - name: "copy files to remote host"
+      copy:
+        src={{ item.src }}
+        dest={{ item.dest }}
+      with_items:
+        - src: /usr/local/src/jdk-8u162-linux-x64.rpm
+          dest: /usr/local/
+        - src: /usr/local/src/apache-tomcat-8.0.38.tar.gz
+          dest: /usr/local/
+    - name: "install jdk"
+      yum:
+        name: /usr/local/jdk-8u162-linux-x64.rpm
+        state: present
+    - name: "install tomcat8"
+      shell: cd /usr/local/ && tar xf apache-tomcat-8.0.38.tar.gz
+    - name: "rename file"
+      shell: mv /usr/local/apache-tomcat-8.0.38 /usr/local/tomcat8
+    - name: "start tomcat"
+      shell: 'nohup /usr/local/tomcat8/bin/startup.sh &'
